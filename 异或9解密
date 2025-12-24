@@ -1,0 +1,26 @@
+def xor_decrypt(encrypted_str, key=9):
+    """异或9解密：字符ASCII码 ^ 9 → 还原原始字符"""
+    decrypted = []
+    for c in encrypted_str:
+        decrypted_char = chr(ord(c) ^ key)
+        decrypted.append(decrypted_char)
+    return ''.join(decrypted)
+
+# ========== 1. 解密各个加密字符串 ==========
+# 提示字符串 aYelhzlGyOehnl3
+enc_hint = "yelhzl)`gy|})|)oehnl3"
+dec_hint = xor_decrypt(enc_hint)
+
+# scanf格式串 a80z
+enc_scanf = ",80z"
+dec_scanf = xor_decrypt(enc_scanf)
+
+# 验证基准值 aOehnl3rHfCcgpt（核心！）
+enc_base = "oehnl3r=<?=hF@CCGPt"
+dec_base = xor_decrypt(enc_base, key=9)
+
+# ========== 3. 输出所有结果 ==========
+print("=== 解密结果 ===")
+print(f"程序打印的提示信息：{dec_hint}")
+print(f"scanf输入格式串：{dec_scanf}")
+print(f"验证基准值（输入解密后需等于此值）：{dec_base}")
