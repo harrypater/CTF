@@ -1,0 +1,5 @@
+file_path = r".\time.pcap"
+with open(file_path,'rb') as file:
+    for i in file.readlines():
+        if b"%20=%20" in i :
+            print(chr(int(i.split(b'%20=%20')[1].split(b',')[0])),end='')
