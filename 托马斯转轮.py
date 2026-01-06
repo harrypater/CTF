@@ -28,18 +28,34 @@ str_first_encry = [
   
 key_index = key.split(",")
 str_second_encry=[]
-for k in key_index:
+
+for index,k in enumerate(key_index):
     str_second_encry.append(str_first_encry[int(k)-1])
-    print(str_first_encry[int(k)-1])
+   
   
+for i in  str_second_encry:
+    print(i)
+    
+print("-------------------------------------")
   
 for i,ch in enumerate(cipher_text):
     line = str_second_encry[i]
-    split_index = line.index(ch)
-    temp=[]
-    temp[0:len(line)-split_index+1] = line[split_index:len(line)]
-    temp[len(temp):] = line[0:split_index]
-    str_second_encry[i] = "".join(temp)
+    find_index=line.index(ch)
+    temp1=[]
+    temp2=[]
+    temp1[:find_index]=line[find_index:]
+    temp2[find_index+1:]=line[:find_index]
+    new_line=''.join(temp1)+''.join(temp2)
+    # print(new_line)
+    str_second_encry[i]=new_line
+     
+ 
 print("-------------------------------------")
 for plain in str_second_encry:
     print(plain)
+    
+print("-------------------------------------")    
+for i in range(len(str_second_encry[0])):
+    for j in str_second_encry:
+        print(j[i].lower(),end='')
+    print('\n')
