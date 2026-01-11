@@ -67,14 +67,40 @@ def morse_to_string(morse_code):
 # 像素值→摩尔斯符号映射（和之前一致）
 PIXEL_TO_MORSE = {0: '.', 251: '-', 243: ' '}  # 点  # 杠 # 空格
 
+pixel_list = []  # 存储提取的所有RGB像素点 (R,G,B)
+
 mose_code = ''
 with Image.open('flag.gif') as gif_image:
     for frame in ImageSequence.Iterator(gif_image):
+        RGB_frame = frame.convert('RGB')
+        single_pixel = RGB_frame.getpixel((0, 0))
+        pixel_list.append(single_pixel)
         # 转RGB+取左上角像素B值
-        r_value = frame.convert('RGB').getpixel((0, 0))[2]
-        if r_value in PIXEL_TO_MORSE:
-            mose_code += PIXEL_TO_MORSE[r_value]
+        b_value = single_pixel[2]
+        if b_value in PIXEL_TO_MORSE:
+            mose_code += PIXEL_TO_MORSE[b_value]
 
-print(mose_code)
+# print(mose_code)
 
 print(morse_to_string(mose_code))
+
+# with Image.open('hack1.png') as hackpng:
+#     for index, pixel in enumerate(pixel_list):
+#         write_y = 0
+#         wirte_x = index
+#         hackpng.putpixel((wirte_x, write_y), pixel)
+
+#     hackpng.save('hack2.png')
+
+
+# with Image.open('hack2.png') as hackpng:
+#     RGB_frame = hackpng.convert('RGB')
+#     img_width, img_height = hackpng.size
+#     for i in range(img_width):
+#         pixel = RGB_frame.getpixel((i, 0))
+#         b_value = pixel[2]
+#         # print(b_value)
+#         if b_value in PIXEL_TO_MORSE:
+#             mose_code += PIXEL_TO_MORSE[b_value]
+
+# print(morse_to_string(mose_code))
